@@ -2,15 +2,12 @@ import '../pages/index.css';
 import {
     openPopup,
     closePopup,
-    closePopupOnOverlay,
-    openPopupCardImage
+    closePopupOnOverlay
 } from './modal.js';
 
 import {
     deleteCard,
     likeCard,
-    handleFormSubmit,
-    addNewCard,
     createCard
 } from './cards.js';
 
@@ -36,7 +33,7 @@ const cardButton = document.querySelector('.profile__add-button');
 const userProfileButton = document.querySelector('.profile__edit-button');
 export const popupAddCard = document.querySelector('.popup__type_new-card');
 export const popupUserProfile = document.querySelector('.popup__type_edit');
-const popupCloseButton = document.querySelectorAll('.popup__close');
+const popupCloseButtons = document.querySelectorAll('.popup__close');
 const popups = document.querySelectorAll('.popup');
 const formProfile = document.forms['edit-profile'];
 export const nameInput = formProfile.querySelector('.popup__input_type_name');
@@ -46,6 +43,38 @@ export const profileDescription = document.querySelector('.profile__description'
 export const formCard = document.forms['new-place'];
 export const placeInput = formCard.querySelector('.popup__input_type_card-name');
 export const linkInput = formCard.querySelector('.popup__input_type_url');
+const popupCardImage = document.querySelector('.popup__type_image');
+const popupImageLink = popupCardImage.querySelector('.popup__image');
+const popupImageText = popupCardImage.querySelector('.popup__caption');
+
+function openPopupCardImage(cardData) { // функция открытия попапа
+    
+    popupImageLink.src = cardData.link;
+    popupImageText.textContent = cardData.name;
+    popupImageText.alt = cardData.name;
+    
+    openPopup(popupCardImage);
+}
+
+export function handleFormSubmit(evt) {
+    evt.preventDefault();
+    
+    profileTitle.textContent = nameInput.value;
+    profileDescription.textContent = jobInput.value;
+    
+    closePopup(popupUserProfile);
+}
+
+export function addNewCard(evt) {
+    evt.preventDefault();
+    
+    const card = {name: placeInput.value, link: linkInput.value};
+    cardsList.prepend(createCard(card, deleteCard, likeCard, openPopupCardImage));
+    
+    closePopup(popupAddCard);
+    
+    evt.target.reset();
+}
 
 cardButton.addEventListener('click', function() {
     openPopup(popupAddCard) 
@@ -59,7 +88,7 @@ userProfileButton.addEventListener('click', function() {
     openPopup(popupUserProfile);
 });
 
-popupCloseButton.forEach(function(button) {
+popupCloseButtons.forEach(function(button) {
     button.addEventListener('click', function() {
         closePopup();
     });

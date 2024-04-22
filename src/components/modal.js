@@ -1,5 +1,3 @@
-import { formCard } from './index.js';
-
 export function openPopup(popup) { // функция открытия попапа
     animatedPopup(popup);
     setTimeout(function() {
@@ -8,20 +6,7 @@ export function openPopup(popup) { // функция открытия попап
     document.addEventListener('keydown', closePopupOnEsc);
 }
 
-export function openPopupCardImage(cardData) { // функция открытия попапа
-    const popupCardImage = document.querySelector('.popup__type_image');
-    
-    const popupImageLink = popupCardImage.querySelector('.popup__image');
-    const popupImageText = popupCardImage.querySelector('.popup__caption');
-    
-    popupImageLink.src = cardData.link;
-    popupImageText.textContent = cardData.name;
-    popupImageText.alt = cardData.name;
-    
-    openPopup(popupCardImage);
-}
-
-export function animatedPopup(popup) { // функция открытия попапа
+function animatedPopup(popup) { // функция открытия попапа
     popup.classList.add('popup_is-animated');
 }
 
@@ -29,9 +14,14 @@ export function closePopup() {
     const popups = document.querySelectorAll('.popup_is-opened');
     popups.forEach(function(popup) {
         popup.classList.remove('popup_is-opened');
+        const form = popup.querySelector('form');
+        if (form) {
+            form.reset();
+        }
     });
+    
     document.removeEventListener('keydown', closePopupOnEsc);
-    formCard.reset();
+    
 }
 
 export function closePopupOnEsc(evt) {

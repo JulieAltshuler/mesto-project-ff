@@ -1,6 +1,3 @@
-import { cardsList, popupAddCard, popupUserProfile, profileTitle, profileDescription, nameInput, jobInput, placeInput, linkInput } from './index';
-import { closePopup, openPopupCardImage } from './modal';
-
 export function deleteCard(event) { // функция удаления карточки
   const card = event.target.closest('.places__item'); // определяем родительский элемент, с помощью метода closest выбираем ближайший элемент
   card.remove(); // удаляем карточку
@@ -10,27 +7,6 @@ export function likeCard(event) {
   const card = event.target.closest('.places__item'); // определяем родительский элемент, с помощью метода closest выбираем ближайший элемент
   const likeButton = card.querySelector('.card__like-button');
   likeButton.classList.toggle('card__like-button_is-active');
-}
-
-export function handleFormSubmit(evt) {
-  evt.preventDefault();
-  
-  profileTitle.textContent = nameInput.value;
-  profileDescription.textContent = jobInput.value;
-  
-  closePopup(popupUserProfile);
-}
-
-export function addNewCard(evt) {
-  evt.preventDefault();
-  
-  const card = {name: placeInput.value, link: linkInput.value};
-  cardsList.prepend(createCard(card, deleteCard, likeCard, openPopupCardImage));
-  
-  closePopup(popupAddCard);
-  
-  evt.target.reset();
-  
 }
 
 export function createCard (cardData, deleteCard, likeCard, openPopupCardImage) { // функция добавления карточки, параметры - информация одной карточки и функция удаления карточки
