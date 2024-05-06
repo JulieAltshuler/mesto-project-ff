@@ -4,4 +4,4 @@
 
 Ссылка на репозиторий проекта - https://github.com/JulieAltshuler/mesto-project-ff.git
 
-Ссылка на GitHub Pages - https://JulieAltshuler.github.io/mesto-project
+Ссылка на GitHub Pages - https://juliealtshuler.github.io/mesto-project-ff/
