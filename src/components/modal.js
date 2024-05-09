@@ -1,37 +1,22 @@
-export function openPopup(popup) { // функция открытия попапа
-    animatedPopup(popup);
-    setTimeout(function() {
-        popup.classList.add('popup_is-opened'); // Добавляем класс для открытия попапа с небольшой задержкой
-    }, 0.1);
-    document.addEventListener('keydown', closePopupOnEsc);
+export function openPopup(popupElement) {
+  popupElement.classList.add('popup_is-opened');
+  document.addEventListener('keydown', closePopupOnEsc);
 }
 
-function animatedPopup(popup) { // функция открытия попапа
-    popup.classList.add('popup_is-animated');
-}
-
-export function closePopup() {
-    const popups = document.querySelectorAll('.popup_is-opened');
-    popups.forEach(function(popup) {
-        popup.classList.remove('popup_is-opened');
-        const form = popup.querySelector('form');
-        if (form) {
-            form.reset();
-        }
-    });
-    
-    document.removeEventListener('keydown', closePopupOnEsc);
-    
+export function closePopup(popupElement) {
+  popupElement.classList.remove('popup_is-opened');
+  document.removeEventListener('keydown', closePopupOnEsc);
 }
 
 export function closePopupOnEsc(evt) {
-    if (evt.key === 'Escape') {
-        closePopup();
-    }
+  if (evt.key === 'Escape') {
+    closePopup(document.querySelector('.popup_is-opened'));
+  }
 }
 
 export function closePopupOnOverlay(evt) {
-    if (evt.target === evt.currentTarget) {
-        closePopup(); 
-    }
+  if (evt.target === evt.currentTarget) {
+    const popupElement = document.querySelector('.popup_is-opened');
+    closePopup(popupElement);
+  }
 }
