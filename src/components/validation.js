@@ -82,10 +82,7 @@ export function enableValidation(validationConfig) {
   );
 
   formList.forEach((formElement) => {
-    formElement.addEventListener(
-      'submit',
-      setEventListeners(formElement, validationConfig)
-    );
+    setEventListeners(formElement, validationConfig);
   });
 }
 
@@ -95,9 +92,7 @@ export function clearValidation(formElement, validationConfig) {
   );
 
   inputList.forEach((inputElement) => {
-    if (hasInvalidInput(inputList)) {
-      hideInputError(formElement, inputElement, validationConfig);
-    }
+    hideInputError(formElement, inputElement, validationConfig);
   });
 
   const submitButton = formElement.querySelector(

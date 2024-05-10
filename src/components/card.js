@@ -52,8 +52,6 @@ export function createCard(cardData, deleteCard, toggleLikeCard, onImageClick) {
   cardImage.alt = cardData.name;
   cardTitle.textContent = cardData.name;
 
-  cardElement.dataset.cardId = cardData._id;
-
   cardImage.addEventListener('click', function () {
     onImageClick(cardData);
   });
